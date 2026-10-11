@@ -19,6 +19,15 @@ sourceSets.main.resources {
 }
 
 repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'GeckoLib'
+                url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+            }
+        }
+        filter { includeGroupAndSubgroups('com.geckolib') }
+    }
 }
 
 base {
@@ -71,6 +80,8 @@ configurations {
 }
 
 dependencies {
+    implementation "com.geckolib:geckolib-neoforge-${minecraft_version}:${geckolibVersion}"
+    interfaceInjectionData "com.geckolib:geckolib-neoforge-${minecraft_version}:${geckolibVersion}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
